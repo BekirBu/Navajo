@@ -1,0 +1,201 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" ng-show="showEmployees">
+            <div class="card-header" data-background-color="blue">
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <h4 class="title">Employees</h4>
+                        <p class="category">Employee: Information</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                <i class="material-icons">search</i>
+                            </span>
+                            <form ng-submit="filter(fil)">
+                                <input class="form-control bluebg" type="text" ng-model="fil" placeholder="Search" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-white pull-right" data-toggle="modal" data-target="#myModal" ng-click="setNull(); save(person)">ADD NEW</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content table-responsive content-holder">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Image</th>
+                        <th ng-click='sortColumn("firstName")' ng-class='sortClass("firstName")'>First Name</th>
+                        <th ng-click='sortColumn("lastName")' ng-class='sortClass("lastName")'>Last Name</th>
+                        <th>Email</th>
+                        <th>Begin Date</th>
+                        <th>End Date</th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat="person in people | orderBy: column:reverse">
+                        <td>
+                            <div class="slikica">
+                                <img ng-src="{{person.image}}">
+                                <!-- <span ng-hide="{{person.image}}">{{person.firstName.split("")[0]}}{{person.lastName.split("")[0]}}</span> -->
+                            </div>
+                        </td>
+                        <td>{{person.firstName}}</td>
+                        <td>{{person.lastName}}</td>
+                        <td>{{person.email}}</td>
+                        <td>{{person.beginDate | date : "dd.MM.yyyy"}}</td>
+                        <td>{{person.endDate | date : "dd.MM.yyyy"}}</td>
+                        <td class="text-right">
+                            <!-- <a href="" ng-click="edit(person)">
+                                <i class="material-icons">edit</i>
+                            </a> -->
+                            <button ng-click="edit(person)" data-toggle="modal" data-target="#myModal" type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs"
+                                data-original-title="Edit Employee">
+                                <i class="material-icons">edit</i>
+                                <div class="ripple-container"></div>
+                            </button>
+                            <!-- <button class="btn btn-success" data-toggle="modal" data-target="#myModal" ng-click="edit(person)">EDIT</button> -->
+                            <button ng-click="deleteTest(person)" type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove">
+                                <i class="material-icons">close</i>
+                                <div class="ripple-container"></div>
+                            </button>
+                            <!-- <button class="btn btn-danger" ng-click="deleteTest(person)">DELETE</button> -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button class="pag-btn btn btn-info" ng-click="previous(page)">Previous</button>
+                    <button class="pag-btn btn btn-info" ng-click="next(page)">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">{{person.firstName}} {{person.lastName}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <input type="hidden" ng-model="person.id">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row slika">
+                                    <img ng-src="{{person.image}}">
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="custom-file">
+                                        <input id="inputImage" type="file" data-classButton="btn btn-primary" ng-model="image" base-sixty-four-input accept="image/*">
+                                        <label class="custom-file-label" for="inputImage">Choose profile image</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="input-group logincard">
+                                <span>
+                                    <i>First Name:</i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="person.firstName">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="input-group logincard">
+                                <span>
+                                    <i>Last Name:</i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="person.lastName">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="input-group logincard">
+                                <span>
+                                    <i>Salary:</i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="person.salary">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row form-group">
+                            <div class="input-group logincard">
+                                <span>
+                                    <i>Email:</i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="person.email">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="input-group logincard">
+                                <span>
+                                    <i>Phone:</i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="person.phone">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="input-group logincard">
+                                <span>
+                                    <i>Birth Date:</i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="person.birthDate">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="input-group logincard">
+                                <span>
+                                    <i>Employment Date:</i>
+                                </span>
+                                <input type="text" class="form-control" ng-model="person.beginDate">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="input-group logincard">
+                                <span>
+                                    <i>Status:</i>
+                                </span>
+                                <label class="radio-inline">
+                                    <input type="radio" ng-model="person.statusEmployee" value="1">Active</label>
+                                <label class="radio-inline">
+                                    <input type="radio" ng-model="person.statusEmployee" value="0">Trial</label>
+                                <label class="radio-inline">
+                                    <input type="radio" ng-model="person.statusEmployee" value="2">Leaver</label>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="input-group logincard">
+                                <span>
+                                    <i>Position: </i>
+                                </span>
+                                <select ng-model="person.position.id" class="form-control" ng-options="role.id as role.name for role in roles" ng-value="role.id">{{role.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" type="button" ng-click="save(person)" data-dismiss="modal">
+                    Save
+                </button>
+                <button class="btn btn-default btn-simple" type="button" data-dismiss="modal">
+                    Cancel
+                </button>
+                <!-- <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="save(person)">SAVE</button> -->
+            </div>
+        </div>
+
+    </div>
+</div>

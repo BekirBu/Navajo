@@ -1,0 +1,174 @@
+<div class="row" data-ng-init="buildDashboard()">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <h4 class="title">Dashboard</h4>
+                        <p class="category">Personal Stats</p>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Year
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="yearDashboard" ng-options="ind for ind in years"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Month
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="monthDashboard" ng-options="months.indexOf(ind) as ind for ind in months"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-white pull-right" ng-click="buildDashboard()">SHOW</button>
+                    </div>
+                    <div data-ng-controller="dashboardController"></div>
+                </div>
+            </div>
+
+            <div class="row card-content content-holder">
+                    <div class="col-md-8">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="F6F621">
+                                <i class="material-icons">face</i>
+                            </div>
+                            <div class="card-content" style="padding-bottom: 22px">
+                                <p class="category">Personal information</p>
+                                <h1 class="title">{{employee.name}}</h1>
+                                <br>
+                                <h4 class="title">Role: {{employee.position.name}}</h4>
+                                <h4 class="title">Date of employment: {{employee.beginDate | date : "dd.MM.yyyy"}}</h4>
+                                <h4 class="title">Email: {{employee.email}}</h4>
+                                <h4 class="title">Phone number: {{employee.phone}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="green" 
+                                        ng-show="workingGood">
+                                    <i class="material-icons">sentiment_very_satisfied</i>
+                                </div>
+                                <div class="card-header" data-background-color="orange" 
+                                        ng-show="workingNeutral">
+                                    <i class="material-icons">sentiment_neutral</i>
+                                </div>
+                                <div class="card-header" data-background-color="red" 
+                                        ng-show="workingBad">
+                                    <i class="material-icons">sentiment_very_dissatisfied</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Worked Hours</p>
+                                    <br>
+                                    <h3 class="title">{{personal.workingDays}} / {{personal.workingDaysInMonth}}</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="card card-stats">
+                                    <div class="card-header" data-background-color="green" 
+                                            ng-show="statusGood">
+                                        <i class="material-icons">assignment_turned_in</i>
+                                    </div>
+                                    <div class="card-header" data-background-color="orange" 
+                                            ng-show="statusNeutral">
+                                        <i class="material-icons">assignment_late</i>
+                                    </div>
+                                    <div class="card-header" data-background-color="red" 
+                                            ng-show="statusBad">
+                                        <i class="material-icons">do_not_disturb_on</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Status of employee</p>
+                                        <br>
+                                        <h3 class="title">{{statusEmp}}</h3>
+                                    </div>
+                                </div>
+                    </div>
+            </div>
+
+            <div class="row card-content content-holder">
+                <div class="col-md-7">
+                    <div class="card card-stats" style="padding-bottom: 20px;">
+                        <div class="card-header" data-background-color="green">
+                            <i class="material-icons">date_range</i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Days Statistic</p>
+                            <canvas id="bar" class="chart chart-horizontal-bar" 
+                                        chart-data="dataDays" chart-labels="labelsDays"></canvas>
+                        </div>
+
+                        <div class="card-content">
+                                <h5 class="title">Paid time off: {{ptoEmp}} h</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                        <div class="card card-stats" style="padding-bottom: 10px">
+                            <div class="card-header" data-background-color="blue">
+                                <i class="material-icons">timer</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category">Total Hours</p>
+                               
+                                <canvas id="doughnut" class="chart chart-doughnut"
+                                        chart-data="dataMissingHours" chart-labels="labelsMissingHours" chart-options="optionsMissingHours">
+                                </canvas> 
+                                <br>
+                                <div class="col-md-6">
+                                    <p class="category">Working:</p>
+                                    <h5 class="title">{{personal.workingDays}}</h5>
+        
+                                    <p class="category">Business abscence:</p>
+                                    <h5 class="title">{{personal.businessAbscenceDays}}</h5>
+
+                                    <p class="category">Vacation:</p>
+                                    <h5 class="title">{{personal.vacationDays}}</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="category">Sick leave:</p>
+                                    <h5 class="title">{{personal.sickLeavesDays}}</h5>
+        
+                                    <p class="category">Public holiday:</p>
+                                    <h5 class="title">{{personal.publicHolidayDay}}</h5>
+
+                                    <p class="category">Religous:</p>
+                                    <h5 class="title">{{personal.religiousDays}}</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="row card-content content-holder">
+                <div class="col-md-6">
+                    <div class="card card-stats">
+                        <div class="card-content">
+                            <p class="category">Bradford Factor</p>
+                            <canvas id="bfChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-stats">
+                        <div class="card-content">
+                            <p class="category">Utilization</p>
+                            <canvas id="utilizationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

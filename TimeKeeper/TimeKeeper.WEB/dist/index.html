@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html ng-app="timeKeeper">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="app.min.css">
+    <script src="lib.min.js"></script>
+    <script src="app.min.js"></script>
+    <script src="template.js"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
+
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="sidebar" data-color="blue" ng-show="currentUser.id!=0">
+        <!-- <div class="logo">
+            <a href="#/timetracking" class="simple-text">
+                TimeKeeper
+            </a>
+        </div> -->
+            <nav class="navbar navbar-transparent navbar-absolute" ng-show="currentUser.id!=0">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a class="btn btn-white btn-round dropdown-toggle" data-toggle="dropdown">
+                                    <i class="material-icons">person</i> {{currentUser.name}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#/logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="sidebar-wrapper malodole">
+                <ul class="nav">
+                    <div class="fino" data-toggle="collapse" data-target="#dashboardi" aria-expanded="true">
+                        <a href="">
+                            <i class="material-icons">dashboard</i>
+                            <p>Dashboard</p>
+                        </a>
+                    </div>
+                    <div id="dashboardi" class="collapse nav defino collapse in degore" aria-expanded="true">
+                        <li class="active">
+                            <a href="#/dashboard">
+                                <p class="text-center hajgore">Personal</p>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#/dashboardTeam" ng-show="currentUser.role === 'Administrator' || currentUser.teamLeadTo.length !== 0 ">
+                                <p class="text-center hajgore">Team</p>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#/dashboardCompany" ng-show="currentUser.role === 'Administrator'">
+                                <p class="text-center hajgore">Company</p>
+                            </a>
+                        </li>
+                    </div>
+
+                    <div class="fino" id="divreporti" ng-show="currentUser.role === 'Administrator'">
+                        <a href="" data-toggle="collapse" data-target="#reporti">
+                            <i class="material-icons">assessment</i>
+                            <p>Reports</p>
+                        </a>
+                    </div>
+                    <div id="reporti" class="collapse nav defino">
+                        <li>
+                            <a href="#/projectHistory" ng-show="currentUser.role === 'Administrator'">
+                                <!-- <i class="material-icons">history</i> -->
+                                <p class="text-center hajgore">Project History</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/annualOverview" ng-show="currentUser.role === 'Administrator'">
+                                <!-- <i class="material-icons">event_note</i> -->
+                                <p class="text-center hajgore">Annual Overview</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/monthlyReport" ng-show="currentUser.role === 'Administrator'">
+                                <!-- <i class="material-icons">assessment</i> -->
+                                <p class="text-center hajgore">Monthly Report</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/missingEntries" ng-show="currentUser.role === 'Administrator'">
+                                <p class="text-center hajgore">Missing Entries</p>
+                            </a>
+                        </li>
+                    </div>
+
+                    <li class="">
+                        <a href="#/invoices" ng-show="currentUser.role === 'Administrator'">
+                            <i class="material-icons">attach_money</i>
+                            <p>Invoices</p>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="#/timetracking">
+                            <i class="material-icons">timer</i>
+                            <p>TimeTracker</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#/teams" ng-show="currentUser.role === 'Administrator'">
+                            <i class="material-icons">people</i>
+                            <p>Teams</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#/employees" ng-show="currentUser.role === 'Administrator'">
+                            <i class="material-icons">person</i>
+                            <p>Employees</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#/customers" ng-show="currentUser.role === 'Administrator'">
+                            <i class="material-icons">library_books</i>
+                            <p>Customers</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#/projects" ng-show="currentUser.role === 'Administrator'">
+                            <i class="material-icons">bubble_chart</i>
+                            <p>Projects</p>
+                        </a>
+                    </li>
+                    <li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-panel malogore">
+            <!-- <nav class="navbar navbar-transparent navbar-absolute" ng-show="currentUser.id!=0">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a class="btn btn-white btn-round dropdown-toggle" data-toggle="dropdown">
+                                    <i class="material-icons">person</i> {{currentUser.name}}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#/logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav> -->
+
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div ng-view></div>
+                </div>
+            </div>
+
+            <footer>
+            </footer>
+
+            <div id="loader" ng-show="waitForLoad">
+                <div id="spinner"></div>
+            </div>
+
+            <toaster-container></toaster-container>
+
+        </div>
+    </div>
+</body>
+
+<script>
+    $('.nav').on('click', 'li', function () {
+        $('.nav li.active').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
+
+</html>

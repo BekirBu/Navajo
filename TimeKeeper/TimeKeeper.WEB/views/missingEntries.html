@@ -1,0 +1,83 @@
+<div class="row" data-ng-init="buildMissingEntries()">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <h4 class="title">Missing Entries</h4>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Year
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="year" ng-options="ind for ind in years"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Month
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="month" ng-options="months.indexOf(ind) as ind for ind in months"></select>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-white pull-right" ng-click="buildMissingEntries()">SHOW</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content table-responsive content-holder">
+                <div class="row">
+                    <div class="col-md-12 missing-entries">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Employees Missing Entries</h3>
+                            </div>
+                            <div class="card-content">
+                                <div ng-repeat="i in missingEntriesData">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <button ng-click="deleteMissingEntry(i)" type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove">
+                                                <i class="material-icons">close</i>
+                                                <div class="ripple-container"></div>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5>
+                                                {{i.employee.firstName}} {{i.employee.lastName}}
+                                            </h5>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="row">
+                                                <div ng-repeat="a in i.missingDays" class="col-md-2">
+                                                    {{a}},
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <br>
+                                </div>
+
+                                <br>
+                                <br>
+                                <div class="row">
+                                    <a href="" ng-click="sendMails(missingEntriesData)" class="btn btn-info">
+                                        Send Notifications
+                                        <i class="material-icons">send</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

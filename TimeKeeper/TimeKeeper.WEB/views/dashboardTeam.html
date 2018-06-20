@@ -1,0 +1,150 @@
+<div class="row" data-ng-init="buildDashboard()">
+    <div class="col-md-12">
+        <div class="card" ng-show="showTeam">
+            <div class="card-header" data-background-color="blue">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <h4 class="title">Dashboard</h4>
+                        <p class="category">Team Stats</p>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Year
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="yearDashboard" ng-options="ind for ind in years"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Month
+                            </span>
+                            <form>
+                                <select class="form-control bluebg" ng-model="monthDashboard" ng-options="months.indexOf(ind) as ind for ind in months"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Team
+                            </span>
+                            <form>
+                                <select class="form-control bluebg" ng-model="teamId" ng-options="number for number in teamLeadToTeams"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-white pull-right" ng-click="buildDashboard()">SHOW</button>
+                    </div>
+                    <div data-ng-controller="dashboardTeamController"></div>
+                </div>
+            </div>
+            <div class="row card-content content-holder">
+                <div class="col-md-4">
+                    <div class="card card-stats">
+                        <div class="card-header" data-background-color="green">
+                            <i class="material-icons">people</i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Number of Employees</p>
+                            <h3 class="title">{{team.numberOfEmployees}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-stats">
+                        <div class="card-header" data-background-color="orange">
+                            <i class="material-icons">work</i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Number of Projects</p>
+                            <h3 class="title">{{team.numberOfProjects}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-stats">
+                        <div class="card-header" data-background-color="red">
+                            <i class="material-icons">timer</i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Total Hours</p>
+                            <h3 class="title">{{team.totalHours}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div class="card card-stats" style="padding-bottom: 70px;">
+                        <div class="card-header" data-background-color="green">
+                            <i class="material-icons">date_range</i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Employees Overtime</p>
+                            <canvas id="bar" class="chart chart-horizontal-bar" 
+                                        chart-data="dataOvertimeInTeams" chart-labels="labelsOvertimeInTeams"></canvas>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-md-5">
+                        <div class="card card-stats" style="padding-bottom: 10px">
+                            <div class="card-header" data-background-color="blue">
+                            <i class="material-icons">timer</i>
+                        </div>
+                        <div class="card-content">
+                            <p class="category">Team {{teamName}} Utilization</p>
+                            <canvas id="bar" class="chart chart-doughnut" 
+                                        chart-data="dataUtilization" 
+                                        chart-labels="labelsUtilization"
+                                        chart-options="optionsUtilizations"></canvas>
+
+                            <br>
+                            <div class="col-md-6">
+                                <p class="category">Working:</p>
+                                <h5 class="title">{{team.days.workingDays}}</h5>
+                
+                                <p class="category">Business abscence:</p>
+                                <h5 class="title">{{team.days.businessAbscenceDays}}</h5>
+        
+                                <p class="category">Vacation:</p>
+                                <h5 class="title">{{team.days.vacationDays}}</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="category">Sick leave:</p>
+                                <h5 class="title">{{team.days.sickLeaveDays}}</h5>
+                
+                                <p class="category">Public holiday:</p>
+                                <h5 class="title">{{team.days.publicHolidays}}</h5>
+        
+                                <p class="category">Religous:</p>
+                                <h5 class="title">{{team.days.religiousDays}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-md-7">
+                        <div class="card card-stats" style="padding-bottom: 10px;">
+                            <div class="card-header" data-background-color="green">
+                                <i class="material-icons">date_range</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category">Employees Missing Entries</p>
+                                <canvas id="bar" class="chart chart-horizontal-bar" 
+                                            chart-data="dataMissingEntriesInTeams" chart-labels="labelsMissingEntriesInTeams"></canvas>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

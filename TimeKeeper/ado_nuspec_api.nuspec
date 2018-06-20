@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AdnanApiArtifactID</id>
+    <version>$version$</version>
+    <authors>Maestral Solutions</authors>
+    <owners>Maestral Solutions</owners>
+    <licenseUrl>http://www.maestralsolutions.com/</licenseUrl>
+    <projectUrl>http://www.maestralsolutions.com</projectUrl>
+    <iconUrl>http://www.maestralsolutions.com</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NuGet Nuspec for ARS Identity Manager</description>
+    <copyright>Copyright Maestral Solutions 2017</copyright>
+  </metadata>
+  <files>
+  
+  <file src="TimeKeeper.API\**\*.*" target="TimeKeeper.DAL\Nuspeci" />
+ 	<!-- <file src="Folder\Subfolder\*.json" target="FolderNameOnApplicationServer\Subfolder" />
+	<file src="Folder\Subfolder\**\*.*" target="FolderNameOnApplicationServer\Subfolder" />
+	<file src="Folder\Subfolder\*.*" target="FolderNameOnApplicationServer\Subfolder" /> -->
+
+  </files>
+</package>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NavajoBackEnd</id>
+    <version>$version$</version>
+    <authors>Maestral Solutions</authors>
+    <owners>Maestral Solutions</owners>
+    <licenseUrl>http://www.maestralsolutions.com/</licenseUrl>
+    <projectUrl>http://www.maestralsolutions.com</projectUrl>
+    <iconUrl>http://www.maestralsolutions.com</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NuGet Nuspec for Navajo TimeKeeper Backend</description>
+    <copyright>Copyright Maestral Solutions 2017</copyright>
+  </metadata>
+  <files>
+ 	<file src="TimeKeeper.API\bin\**\*.*" target="api\bin" />
+	<file src="TimeKeeper.API\Web.config" target="api" />
+  </files>
+</package>

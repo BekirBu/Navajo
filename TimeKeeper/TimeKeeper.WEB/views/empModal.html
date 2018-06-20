@@ -1,0 +1,74 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">{{customer.name}}</h3>
+</div>
+
+<div class="modal-body" id="modal-body">
+    <input type="hidden" ng-model="person.id">
+    <div class="row">
+        <div class="col-md-4 label">First name:</div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" ng-model="person.firstName">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 label">Last name:</div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" ng-model="person.lastName">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 label">Email:</div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" ng-model="person.email">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 label">Phone:</div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" ng-model="person.phone">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 label">Birth date:</div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" ng-model="person.birthDate">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 label">Employment date:</div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" ng-model="person.beginDate">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 label">Salary:</div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" ng-model="person.salary">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 label">Status:</div>
+        <div class="col-md-7">
+            <label class="radio-inline">
+                <input type="radio" ng-model="person.statusEmployee" value="1">Active</label>
+            <label class="radio-inline">
+                <input type="radio" ng-model="person.statusEmployee" value="0">Trial</label>
+            <label class="radio-inline">
+                <input type="radio" ng-model="person.statusEmployee" value="2">Leaver</label>
+        </div>
+    </div>
+    <div class="custom-file">
+        <input id="inputImage" type="file" data-classButton="btn btn-primary" ng-model="image" base-sixty-four-input accept="image/*">
+        <label class="custom-file-label" for="inputImage">Choose profile image</label>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-info" type="button" ng-click="save(customer)">
+        Save
+    </button>
+    <button class="btn btn-danger btn-simple" type="button" ng-click="cancel()" data-dismiss="modal">
+        Cancel
+    </button>
+    <!-- <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="cancel()">CLOSE</button>
+    <button type="button" class="btn btn-success" ng-click="save(customer)">SAVE</button> -->
+</div>

@@ -1,0 +1,143 @@
+<div class="row" data-ng-init="buildInvoices()">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <h4 class="title">Invoices</h4>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Year
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="year" ng-options="ind for ind in years"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Month
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="month" ng-options="months.indexOf(ind) as ind for ind in months"></select>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-white pull-right" ng-click="buildInvoices()">SHOW</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content table-responsive content-holder">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Customer Name</th>
+                        <th>Invoice Number</th>
+                        <th>Invoice Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr ng-repeat="invoice in invoicesData">
+                        <td>{{invoice.projectName}}</td>
+                        <td>{{invoice.customerName}}</td>
+                        <td>{{invoice.invoiceNumber}}</td>
+                        <td>{{invoiceDate | date : "dd.MM.yyyy" }}</td>
+                        <td>{{invoice.amount | currency : $ : 2}}</td>
+                        <td>draft</td>
+                        <td>
+                            <button ng-click="viewInvoice(invoice)" data-toggle="modal" data-target="#invoicesModal" type="button" rel="tooltip" title=""
+                                class="btn btn-info btn-simple btn-xs" data-original-title="View Invoice">
+                                <i class="material-icons">find_in_page</i>
+                                <div class="ripple-container"></div>
+                            </button>
+                            <!-- <a href="" ng-click="viewInvoice(invoice)" data-toggle="modal" data-target="#invoicesModal">
+                                <i class="material-icons">pageview</i>
+                            </a> -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="invoicesModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content invoicesContent">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row card-content content-holder">
+                            <div class="col-md-12">
+                                <div class="card card-stats">
+                                    <div class="card-header" data-background-color="green">
+                                        <i class="material-icons">payment</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Invoice details</p>
+                                        <h4 class="title">Project: {{invoicesRoles.projectName}}</h4>
+                                        <h4 class="title">Customer: {{invoicesRoles.customerName}}</h4>
+                                        <br>
+                                        <br>
+                                        <h4 class="title">
+                                            <div>Invoice Number: {{invoicesRoles.invoiceNumber}}</div>
+                                            <div>Total Amount: {{totalAmount | currency : $ : 2}}</div>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-content table-responsive content-holder">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Unit</th>
+                                    <th>Unit Price</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                                <tr ng-repeat="role in invoicesRoles.roles">
+                                    <td>{{role.description}}</td>
+                                    <td>{{role.quantity}}</td>
+                                    <td>{{role.unit}}</td>
+                                    <td>{{role.unitPrice | currency : $ : 2}}</td>
+                                    <td>{{role.subotal | currency : $ : 2}}</td>
+                                    <td>
+                                        <button ng-click="deleteRole(role)" type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove">
+                                            <i class="material-icons">close</i>
+                                            <div class="ripple-container"></div>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <hr>
+                <!-- <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                <a href="" ng-click="sendMails(invoicesRoles)" data-dismiss="modal" class="btn btn-info">
+                    Send Invoice
+                    <i class="material-icons">send</i>
+                </a> -->
+                <button class="btn btn-info" type="button" ng-click="sendMails(invoicesRoles)" data-dismiss="modal">
+                    Send
+                </button>
+                <button class="btn btn-default btn-simple" type="button" data-dismiss="modal">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,198 @@
+<div class="row" data-ng-init="buildDashboard()">
+    <div class="col-md-12">
+        <div class="card" ng-show="showCompany">
+            <div class="card-header" data-background-color="blue">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <h4 class="title">Dashboard</h4>
+                        <p class="category">
+                            Company Stats
+                            <br> {{monthDashboard}}/{{yearDashboard}}
+                        </p>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Year
+                            </span>
+                            <form>
+                                <!-- <input type="number" class="form-control" ng-model="yearDashboard" min="2016" max="2018"> -->
+                                <select class="bluebg form-control" ng-model="yearDashboard" ng-options="ind for ind in years"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Month
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="monthDashboard" ng-options="months.indexOf(ind) as ind for ind in months"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-white pull-right" ng-click="buildDashboard()">SHOW</button>
+
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row card-content content-holder">
+                    <div class="col-md-4">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="green">
+                                <i class="material-icons">people</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category">Number of Employees</p>
+                                <h3 class="title">{{company.numEmployees}}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="orange">
+                                <i class="material-icons">work</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category">Number of Projects</p>
+                                <h3 class="title">{{company.numProjects}}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="red">
+                                <i class="material-icons">timer</i>
+                            </div>
+                            <div class="card-content">
+                                <p class="category">Total Hours Worked</p>
+                                <h3 class="title">{{company.totalHours}}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row card-content content-holder">
+                            <div class="col-md-8">
+                                <div class="card card-stats" style="padding-bottom: 10px;">
+                                    <div class="card-header" data-background-color="blue">
+                                        <i class="material-icons">attach_money</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="category">Revenue by Projects</p>
+                                        <canvas id="bar" class="chart chart-horizontal-bar" 
+                                                        chart-data="dataProjectRevenue" 
+                                                        chart-labels="labelsProjectRevenue"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                    <div class="card card-stats" style="padding-bottom: 22px;">
+                                            <div class="card-header" data-background-color="blue">
+                                                    <i class="material-icons">attach_money</i>
+                                            </div>
+                                            <div class="card-content">
+                                                <br>
+                                                <br>
+                                                <h3>Total Revenue:</h3>
+                                                <h5>{{sumRevenue | currency : $ : 2}}</h5>
+                                                <br>
+                                                <h3>Project with max Revenue:</h3>
+                                                <h5>{{maxRevenueProject}} | {{maxRevenue | currency : $ : 2}}</h5>
+                                            </div>
+                                        </div>
+                            </div>
+                    </div>
+
+                    <div class="row card-content content-holder">
+                        <div class="col-md-6">
+                            <div class="card card-stats" style="padding-bottom: 10px;">
+                                <div class="card-header" data-background-color="green">
+                                    <i class="material-icons">date_range</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Overtime by Teams</p>
+                                    <canvas id="bar" class="chart chart-horizontal-bar" 
+                                                chart-data="dataTeamOvertime" chart-labels="labelsTeamOvertime"></canvas>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                
+                            </div>
+                    </div>
+
+                        <div class="col-md-6">
+                                <div class="card card-stats" style="padding-bottom: 10px;">
+                                        <div class="card-header" data-background-color="green">
+                                            <i class="material-icons">date_range</i>
+                                        </div>
+                                        <div class="card-content">
+                                            <p class="category">Utilization by Teams</p>
+                                            <canvas id="bar" class="chart chart-doughnut" 
+                                                        chart-data="dataUtilizations" 
+                                                        chart-labels="labelsUtilizations"
+                                                        chart-options="optionsUtilizations"></canvas>
+                                            </div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="row card-content content-holder">
+                        <div class="col-md-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4>Number of DEVs | {{company.devCount}}</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="chart-container" style="position: relative; height:40vh; width:30vw">
+                                        <canvas id="devUtilization"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4>Number of QAs | {{company.qaCount}}</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="chart-container" style="position: relative; height:40vh; width:30vw">
+                                        <canvas id="qaUtilization"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4>Number of UI/UXs | {{company.uiuxCount}}</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="chart-container" style="position: relative; height:40vh; width:30vw">
+                                        <canvas id="uiuxUtilization"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4>Number of PMs | {{company.pmCount}}</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="chart-container" style="position: relative; height:40vh; width:30vw">
+                                        <canvas id="pmUtilization"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

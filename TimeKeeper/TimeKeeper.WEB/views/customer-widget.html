@@ -1,0 +1,36 @@
+<div class="card custFrame">
+    <img ng-src="images/{{data.monogram}}.jpg">
+    <div class="card-content">
+        <h4 class="title custTitle">{{data.name}}</h4>
+        <p class="category">
+            <span class="text-info">{{data.contact}}</p>
+    </div>
+    <div class="card-footer">
+        <div class="stats">
+            {{data.phone}}
+        </div>
+        <div class="custNav">
+            <button ng-click="edit(data)" type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Employee">
+                <i class="material-icons">edit</i>
+            </button>
+            <button ng-click="deleteTest(data)" type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <br>
+    </div>
+</div>
+
+<!-- <div class="custFrame">
+    <img class="custImage" ng-src="images/{{data.monogram}}.jpg">
+    <div class="custData">
+        <span class="custTitle">{{data.name}}</span><br>
+        {{data.contact}}<br>
+        {{data.phone}}
+    </div>
+    <div class="clearfix"></div>
+    <div class="custNav">
+        <a href="" ng-click="edit(data)"><i class="glyphicon glyphicon-pencil"></i></a>
+        <a href="" ng-click="deleteTest(data)"><i class="glyphicon glyphicon-trash"></i></a>
+    </div>
+</div> -->

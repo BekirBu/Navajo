@@ -1,0 +1,62 @@
+<div class="row" data-ng-init="buildReport()">
+    <div class="col-md-12">
+        <div class="card" ng-show="showReport">
+            <div class="card-header" data-background-color="blue">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <h4 class="title">Reports</h4>
+                        <p class="category">Annual Report</p>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Year
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="year" ng-options="ind for ind in years"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-white pull-right" ng-click="buildReport()">SHOW</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content table-responsive content-holder">
+                <table class="table table-hover">
+                    <th>Projects</th>
+                    <th>Total Hours</th>
+                    <th>January</th>
+                    <th>February</th>
+                    <th>March</th>
+                    <th>April</th>
+                    <th>May</th>
+                    <th>June</th>
+                    <th>July</th>
+                    <th>August</th>
+                    <th>September</th>
+                    <th>October</th>
+                    <th>November</th>
+                    <th>December</th>
+                    <tr ng-repeat="item in annual">
+                        <td>{{item.projectName}}</td>
+                        <td>{{item.totalHours}}</td>
+                        <td>{{item.monthlyHours[0]}}</td>
+                        <td>{{item.monthlyHours[1]}}</td>
+                        <td>{{item.monthlyHours[2]}}</td>
+                        <td>{{item.monthlyHours[3]}}</td>
+                        <td>{{item.monthlyHours[4]}}</td>
+                        <td>{{item.monthlyHours[5]}}</td>
+                        <td>{{item.monthlyHours[6]}}</td>
+                        <td>{{item.monthlyHours[7]}}</td>
+                        <td>{{item.monthlyHours[8]}}</td>
+                        <td>{{item.monthlyHours[9]}}</td>
+                        <td>{{item.monthlyHours[10]}}</td>
+                        <td>{{item.monthlyHours[11]}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

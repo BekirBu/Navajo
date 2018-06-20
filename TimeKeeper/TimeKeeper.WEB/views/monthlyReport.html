@@ -1,0 +1,56 @@
+<div class="row" data-ng-init="buildReport()">
+    <div class="col-md-12">
+        <div class="card" ng-show="showReport">
+            <div class="card-header" data-background-color="blue">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <h4 class="title">Reports</h4>
+                        <p class="category">Monthly Report</p>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Year
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="year" ng-options="ind for ind in years"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Month
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="month" ng-options="months.indexOf(ind) as ind for ind in months"></select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-white pull-right" ng-click="buildReport()">SHOW</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content table-responsive content-holder">
+                <table class="table table-hover">
+                    <th ng-repeat="pro in proArray">{{pro}}</th>
+                    <tr ng-repeat="emp in empList">
+                        <td>{{emp.empName}}</td>
+                        <td>{{emp.proName[1]}}</td>
+                        <td>{{emp.proName[2]}}</td>
+                        <td>{{emp.proName[3]}}</td>
+                        <td>{{emp.proName[4]}}</td>
+                        <td>{{emp.proName[5]}}</td>
+                        <td>{{emp.proName[6]}}</td>
+                        <td>{{emp.proName[7]}}</td>
+                        <td>{{emp.proName[8]}}</td>
+                        <td>{{emp.proName[9]}}</td>
+                        <td>{{emp.proName[10]}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

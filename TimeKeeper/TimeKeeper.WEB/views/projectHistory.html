@@ -1,0 +1,47 @@
+<div class="row" data-ng-init="buildReport()">
+    <div class="col-md-12">
+        <div class="card" ng-show="showReport">
+            <div class="card-header" data-background-color="blue">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <h4 class="title">Reports</h4>
+                        <p class="category">Project History</p>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <div class="input-group form-info">
+                            <span class="input-group-addon beWhite">
+                                Project
+                            </span>
+                            <form>
+                                <select class="bluebg form-control" ng-model="projectId" ng-options="project.id as project.name for project in projects">
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-white pull-right" ng-click="buildReport()">SHOW</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content table-responsive content-holder">
+                <table class="table table-hover">
+                    <th>Employees</th>
+                    <th>Total Hours</th>
+                    <th>2015</th>
+                    <th>2016</th>
+                    <th>2017</th>
+                    <th>2018</th>
+                    <tr ng-repeat="item in history.employees">
+                        <td>{{item.name}}</td>
+                        <td>{{item.totalHours}}</td>
+                        <td>{{item.sumList[0].sum}}</td>
+                        <td>{{item.sumList[1].sum}}</td>
+                        <td>{{item.sumList[2].sum}}</td>
+                        <td>{{item.sumList[3].sum}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

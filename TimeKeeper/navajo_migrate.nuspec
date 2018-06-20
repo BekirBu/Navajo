@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NavajoDatabase</id>
+    <version>$version$</version>
+    <authors>Maestral Solutions</authors>
+    <owners>Maestral Solutions</owners>
+    <licenseUrl>http://www.maestralsolutions.com/</licenseUrl>
+    <projectUrl>http://www.maestralsolutions.com</projectUrl>
+    <iconUrl>http://www.maestralsolutions.com</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NuGet Nuspec for Navajo TimeKeeper Migration</description>
+    <copyright>Copyright Maestral Solutions 2017</copyright>
+  </metadata>
+  <files>
+ 	<file src="TimeKeeper.DAL\bin\Release\*.*" />
+	<file src="packages\EntityFramework.6.2.0\tools\migrate.exe" />
+	<file src="*.ps1" />
+  </files>
+</package>
